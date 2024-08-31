@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,13 +14,21 @@
         <li>
             <a href="{% url "about" %}">About</a>
         </li>
+        {% if user.is_authenticated %}
         <li>
-            <a href="{% url "about" %}">Log In</a>
+            <a href="{% url "account_logout" %}">Log Out</a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url "account_login" %}">Log In</a>
         </li>
         <li>
-            <a href="{% url "about" %}">Sign Up</a>
-
+            <a href="{% url "account_signup" %}">Sign Up</a>
         </li>
+        <li>
+            <a href="{% url "github_login" %}">Sign Up with GitHub</a>
+        </li>
+        {% endif %}
     </ul>
     <div class="container">
         {% block content %}
