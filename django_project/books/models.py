@@ -1,8 +1,7 @@
-import re
-
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 
 from .utils import unique_slugify
@@ -15,7 +14,8 @@ class Book(models.Model):
     slug = models.SlugField(default="", null=False)
 
     def save(self, *args, **kwargs):
-        self.slug = unique_slugify(self, slugify(self.title))
+        if not self.slug:
+            self.slug = unique_slugify(self, slugify(self.title))
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -23,3 +23,19 @@ class Book(models.Model):
 
     def get_absolute_url(self):
         return reverse("book_detail", args=[self.slug])
+
+
+class Review(models.Model):
+    book = models.ForeignKey(
+        Book,
+        on_delete=models.CASCADE,
+        related_name="reviews",
+    )
+    review = models.CharField(max_length=255)
+    author = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.review
