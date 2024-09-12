@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",
     "books.apps.BooksConfig",
+    # Third-party   
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
