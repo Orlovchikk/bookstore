@@ -1,8 +1,8 @@
 import os
-import dj_database_url
-
+from os.path import dirname, join
 from pathlib import Path
-from os.path import join, dirname
+
+import dj_database_url
 from dotenv import load_dotenv
 
 dotevn_path = join(dirname(__file__), ".env")
@@ -167,7 +167,7 @@ AUTHENTICATION_BACKEND = (
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = True

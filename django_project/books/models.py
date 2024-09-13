@@ -1,8 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
-from django.contrib.auth import get_user_model
-
 
 from .utils import unique_slugify
 
@@ -14,13 +13,18 @@ class Book(models.Model):
     slug = models.SlugField(default="", null=False)
     cover = models.ImageField(upload_to="covers/", blank=True)
 
+    class Meta:
+        permissions = [
+            ('special_status', 'Can read all books'),
+        ]
+
+    def __str__(self):
+        return f"{self.title} by {self.author}"
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = unique_slugify(self, slugify(self.title))
         super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"{self.title} by {self.author}"
 
     def get_absolute_url(self):
         return reverse("book_detail", args=[self.slug])
