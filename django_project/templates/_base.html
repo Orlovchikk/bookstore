@@ -6,7 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    { compress css }
     <link rel="stylesheet" href="{% static "css/base.css" %}">
+    { endcompress }
     <title>{% block title %}Bookstore{% endblock title %}</title>
 </head>
 <body>
@@ -41,6 +43,8 @@
         {% block content %}
         {% endblock content %}
     </div>
+    { compress js }
     <script src='{% static "js/base.js" %}'></script>
+    { endcompress}
 </body>
 </html>

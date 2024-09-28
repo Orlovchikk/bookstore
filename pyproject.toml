@@ -20,6 +20,8 @@ django-cleanup = "^8.1.0"
 [tool.poetry.group.dev.dependencies]
 isort = "^5.13.2"
 djlint = "^1.35.2"
+django-debug-toolbar = "^4.4.6"
+django-compressor = "^4.5.1"
 
 [build-system]
 requires = ["poetry-core"]
